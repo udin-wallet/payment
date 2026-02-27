@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment - Miftah Muhtadiin</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,112 +17,181 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f4f4f4;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 70px 20px;
+    overflow-x: hidden;
+
+    background: linear-gradient(-45deg, #e3f2fd, #fce4ec, #f3e5f5, #e8f5e9);
+    background-size: 400% 400%;
+    animation: gradientMove 18s ease infinite;
 }
 
-/* ===== PROFILE ===== */
+/* Animated Background */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* PROFILE */
 .profile {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 55px;
+    opacity: 0;
+    transform: translateY(-40px);
+    animation: fadeDown 1.5s ease forwards;
 }
 
 .profile img {
-    width: 110px;
-    height: 110px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    margin-bottom: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    margin-bottom: 18px;
+    transition: 0.4s;
+}
+
+.profile img:hover {
+    transform: scale(1.05);
 }
 
 .profile h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    color: #333;
+    color: #222;
 }
 
-/* ===== CARD PAYMENT ===== */
+/* GLASS CARD */
 .box {
     width: 100%;
-    max-width: 420px;
-    background: #e9ecef;
-    border-radius: 30px;
-    padding: 18px 22px;
-    margin-bottom: 18px;
+    max-width: 440px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
-    transition: 0.3s;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,0.4);
+
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeUp 1.5s ease forwards;
+
+    transition: all 0.5s ease;
 }
 
+/* Delay elegant */
+.box:nth-of-type(2) { animation-delay: 0.5s; }
+.box:nth-of-type(3) { animation-delay: 0.9s; }
+.box:nth-of-type(4) { animation-delay: 1.3s; }
+.box:nth-of-type(5) { animation-delay: 1.7s; }
+
 .box:hover {
-    transform: scale(1.02);
-    background: #dde1e4;
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+/* Ripple Effect */
+.box::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.box:active::after {
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.7;
+    }
+    100% {
+        width: 600px;
+        height: 600px;
+        opacity: 0;
+    }
 }
 
 /* Logo */
 .payment-logo {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
 /* Info */
 .info {
-    flex: 1;
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 .info h3 {
     font-size: 14px;
-    font-weight: 600;
-    color: #444;
+    font-weight: 500;
+    color: #555;
 }
 
 .info p {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
-    color: #222;
+    color: #111;
+    letter-spacing: 0.6px;
 }
 
-/* Button */
-button {
-    padding: 7px 15px;
-    border: none;
-    border-radius: 20px;
-    background: #333;
-    color: white;
-    font-size: 12px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: black;
-}
-
-/* Toast */
+/* TOAST */
 .toast {
     position: fixed;
-    bottom: 30px;
-    background: #333;
+    bottom: 40px;
+    background: rgba(0,0,0,0.9);
     color: white;
-    padding: 10px 20px;
-    border-radius: 30px;
+    padding: 14px 28px;
+    border-radius: 50px;
     font-size: 13px;
     opacity: 0;
-    transition: 0.4s;
+    transform: translateY(40px) scale(0.9);
+    transition: all 0.5s ease;
 }
 
 .toast.show {
     opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Animations */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 </style>
@@ -130,65 +199,59 @@ button:hover {
 
 <body>
 
-<!-- ===== PROFILE ===== -->
 <div class="profile">
     <img src="logo.png" alt="Profile">
     <h2>Miftah Muhtadiin</h2>
 </div>
 
-<!-- ===== BCA ===== -->
-<div class="box">
+<div class="box" onclick="copyText('1570041220')">
     <img src="bca.png" class="payment-logo">
     <div class="info">
         <h3>Miftah Muhtadiin</h3>
-        <p id="bca">1570041220</p>
+        <p>1570041220</p>
     </div>
-    <button onclick="copyText('bca')">Copy</button>
 </div>
 
-<!-- ===== Mandiri ===== -->
-<div class="box">
+<div class="box" onclick="copyText('1300026102817')">
     <img src="mandiri.png" class="payment-logo">
     <div class="info">
         <h3>Miftah Muhtadiin</h3>
-        <p id="mandiri">1300026102817</p>
+        <p>1300026102817</p>
     </div>
-    <button onclick="copyText('mandiri')">Copy</button>
 </div>
 
-<!-- ===== Seabank ===== -->
-<div class="box">
+<div class="box" onclick="copyText('901220026807')">
     <img src="seabank.png" class="payment-logo">
     <div class="info">
         <h3>Miftah Muhtadiin</h3>
-        <p id="seabank">901220026807</p>
+        <p>901220026807</p>
     </div>
-    <button onclick="copyText('seabank')">Copy</button>
 </div>
 
-<!-- ===== DANA ===== -->
-<div class="box">
+<div class="box" onclick="copyText('082218783050')">
     <img src="dana.png" class="payment-logo">
     <div class="info">
         <h3>Miftah Muhtadiin</h3>
-        <p id="dana">082218783050</p>
+        <p>082218783050</p>
     </div>
-    <button onclick="copyText('dana')">Copy</button>
 </div>
 
-<div id="toast" class="toast">Number Copied!</div>
+<div id="toast" class="toast">Number Copied ✓</div>
 
 <script>
-function copyText(id) {
-    var text = document.getElementById(id).innerText;
+function copyText(text) {
     navigator.clipboard.writeText(text);
 
-    var toast = document.getElementById("toast");
+    const toast = document.getElementById("toast");
     toast.classList.add("show");
+
+    if (navigator.vibrate) {
+        navigator.vibrate(40);
+    }
 
     setTimeout(() => {
         toast.classList.remove("show");
-    }, 2000);
+    }, 2300);
 }
 </script>
 
