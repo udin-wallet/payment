@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment - Miftah Muhtadiin</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -22,27 +22,33 @@ body{
     flex-direction:column;
     align-items:center;
     padding:70px 20px;
+    overflow-x:hidden;
 
-    /* Gradient lebih putih */
-    background: linear-gradient(180deg, #f9fafb 0%, #f1f3f5 100%);
+    /* Gradient putih clean */
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
 }
 
 /* PROFILE */
 .profile{
     text-align:center;
-    margin-bottom:60px;
+    margin-bottom:55px;
     opacity:0;
-    transform:translateY(-30px);
+    transform:translateY(-40px);
     animation:fadeDown 1.2s ease forwards;
 }
 
 .profile img{
-    width:120px;
-    height:120px;
+    width:125px;
+    height:125px;
     border-radius:50%;
     object-fit:cover;
-    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+    box-shadow:0 20px 50px rgba(0,0,0,0.12);
     margin-bottom:18px;
+    transition:0.3s;
+}
+
+.profile img:hover{
+    transform:scale(1.05);
 }
 
 .profile h2{
@@ -54,27 +60,25 @@ body{
 /* CARD */
 .box{
     width:100%;
-    max-width:430px;
-    padding:28px;
-    margin-bottom:25px;
+    max-width:440px;
+    padding:20px 24px;
+    margin-bottom:22px;
 
     display:flex;
-    flex-direction:column;        /* center vertical layout */
-    align-items:center;           /* center horizontal */
-    justify-content:center;
+    align-items:center;
+    justify-content:space-between;
 
-    text-align:center;
+    border-radius:28px;
 
-    border-radius:30px;
-
-    background:rgba(255,255,255,0.6);
+    background:rgba(255,255,255,0.7);
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,0.8);
+    border:1px solid rgba(255,255,255,0.9);
 
-    box-shadow:0 10px 35px rgba(0,0,0,0.06);
+    box-shadow:0 12px 35px rgba(0,0,0,0.06);
 
-    cursor:pointer;
+    position:relative;
+    overflow:hidden;
 
     opacity:0;
     transform:translateY(40px);
@@ -82,7 +86,7 @@ body{
     transition:all 0.4s ease;
 }
 
-/* Delay smooth */
+/* delay animation */
 .box:nth-of-type(2){ animation-delay:0.4s; }
 .box:nth-of-type(3){ animation-delay:0.7s; }
 .box:nth-of-type(4){ animation-delay:1s; }
@@ -90,33 +94,86 @@ body{
 
 .box:hover{
     transform:translateY(-5px);
-    box-shadow:0 18px 45px rgba(0,0,0,0.08);
+    box-shadow:0 20px 45px rgba(0,0,0,0.08);
 }
 
-/* Logo */
+/* ripple */
+.box::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:0;
+    background:rgba(0,0,0,0.05);
+    border-radius:50%;
+    transform:scale(0);
+    opacity:0;
+    pointer-events:none;
+}
+
+.box:active::after{
+    animation:ripple 0.6s linear;
+}
+
+@keyframes ripple{
+    0%{
+        width:0;
+        height:0;
+        opacity:0.4;
+    }
+    100%{
+        width:600px;
+        height:600px;
+        opacity:0;
+    }
+}
+
+/* left section */
+.left{
+    display:flex;
+    align-items:center;
+}
+
+/* logo */
 .payment-logo{
-    width:60px;
-    height:60px;
+    width:50px;
+    height:50px;
     object-fit:contain;
-    margin-bottom:15px;
+    margin-right:18px;
 }
 
-/* Text */
+/* info */
 .info h3{
     font-size:14px;
     font-weight:500;
     color:#666;
-    margin-bottom:6px;
 }
 
 .info p{
-    font-size:18px;
+    font-size:17px;
     font-weight:600;
     color:#111;
-    letter-spacing:0.8px;
+    letter-spacing:0.6px;
 }
 
-/* Toast */
+/* COPY BUTTON */
+.copy-btn{
+    padding:8px 16px;
+    border:none;
+    border-radius:20px;
+    background:#111;
+    color:white;
+    font-size:12px;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.copy-btn:hover{
+    background:#000;
+    transform:scale(1.05);
+}
+
+/* TOAST */
 .toast{
     position:fixed;
     bottom:40px;
@@ -160,36 +217,48 @@ body{
     <h2>Miftah Muhtadiin</h2>
 </div>
 
-<div class="box" onclick="copyText('1570041220')">
-    <img src="bca.png" class="payment-logo">
-    <div class="info">
-        <h3>Miftah Muhtadiin</h3>
-        <p>1570041220</p>
+<div class="box">
+    <div class="left">
+        <img src="bca.png" class="payment-logo">
+        <div class="info">
+            <h3>Miftah Muhtadiin</h3>
+            <p>1570041220</p>
+        </div>
     </div>
+    <button class="copy-btn" onclick="copyText('1570041220')">Copy</button>
 </div>
 
-<div class="box" onclick="copyText('1300026102817')">
-    <img src="mandiri.png" class="payment-logo">
-    <div class="info">
-        <h3>Miftah Muhtadiin</h3>
-        <p>1300026102817</p>
+<div class="box">
+    <div class="left">
+        <img src="mandiri.png" class="payment-logo">
+        <div class="info">
+            <h3>Miftah Muhtadiin</h3>
+            <p>1300026102817</p>
+        </div>
     </div>
+    <button class="copy-btn" onclick="copyText('1300026102817')">Copy</button>
 </div>
 
-<div class="box" onclick="copyText('901220026807')">
-    <img src="seabank.png" class="payment-logo">
-    <div class="info">
-        <h3>Miftah Muhtadiin</h3>
-        <p>901220026807</p>
+<div class="box">
+    <div class="left">
+        <img src="seabank.png" class="payment-logo">
+        <div class="info">
+            <h3>Miftah Muhtadiin</h3>
+            <p>901220026807</p>
+        </div>
     </div>
+    <button class="copy-btn" onclick="copyText('901220026807')">Copy</button>
 </div>
 
-<div class="box" onclick="copyText('082218783050')">
-    <img src="dana.png" class="payment-logo">
-    <div class="info">
-        <h3>Miftah Muhtadiin</h3>
-        <p>082218783050</p>
+<div class="box">
+    <div class="left">
+        <img src="dana.png" class="payment-logo">
+        <div class="info">
+            <h3>Miftah Muhtadiin</h3>
+            <p>082218783050</p>
+        </div>
     </div>
+    <button class="copy-btn" onclick="copyText('082218783050')">Copy</button>
 </div>
 
 <div id="toast" class="toast">Berhasil disalin ✓</div>
@@ -200,6 +269,10 @@ function copyText(text){
 
     const toast=document.getElementById("toast");
     toast.classList.add("show");
+
+    if(navigator.vibrate){
+        navigator.vibrate(40);
+    }
 
     setTimeout(()=>{
         toast.classList.remove("show");
